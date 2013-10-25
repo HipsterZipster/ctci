@@ -17,6 +17,7 @@ public class QuestionB {
 			return 0;
 		}
 		int val = 0;
+
 		Queue<Integer> queue3 = new LinkedList<Integer>();
 		Queue<Integer> queue5 = new LinkedList<Integer>();
 		Queue<Integer> queue7 = new LinkedList<Integer>();
