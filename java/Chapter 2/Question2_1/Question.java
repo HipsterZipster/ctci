@@ -1,10 +1,12 @@
 package Question2_1;
 
-import java.util.Hashtable;
-
-import CtCILibrary.AssortedMethods;
 import CtCILibrary.LinkedListNode;
 
+import java.util.Hashtable;
+
+/**
+ * Remove Dups from a linked list
+ */
 public class Question {
 	public static int tapB = 0;
 	public static int tapC = 0;
@@ -17,7 +19,8 @@ public class Question {
 		}
 	}
 
-	public static void deleteDupsA(LinkedListNode n) {
+
+	public static void deleteDupsWithBuffer(LinkedListNode n) {
 		Hashtable table = new Hashtable();
 		LinkedListNode previous = null;
 		while (n != null) {
@@ -30,8 +33,12 @@ public class Question {
 			n = n.next;
 		}
 	}
-	
-	public static void deleteDupsC(LinkedListNode head) {
+
+    /**
+     * O(1) space, but O(n^2) time
+     * @param head
+     */
+	public static void deleteDupsNoBuffer(LinkedListNode head) {
 		if (head == null) return;
 		LinkedListNode previous = head;
 		LinkedListNode current = previous.next;
@@ -44,7 +51,7 @@ public class Question {
 					LinkedListNode tmp = current.next;
 					previous.next = tmp;
 					current = tmp;
-					/* We know we can’t have more than one dup preceding
+					/* We know we canï¿½t have more than one dup preceding
 					 * our element since it would have been removed 
 					 * earlier. */
 				    break;
@@ -52,12 +59,10 @@ public class Question {
 				runner = runner.next;
 			}
 			
-			/* If runner == current, then we didn’t find any duplicate 
-			 * elements in the previous for loop.  We then need to 
-			 * increment current.  
-			 * If runner != current, then we must have hit the ‘break’ 
-			 * condition, in which case we found a dup and current has
-			 * already been incremented.*/
+			/* If runner == current, then we didnt find any duplicate
+			 * elements in the previous for loop.  We then need to increment current.
+			 * If runner != current, then we must have hit the ï¿½breakï¿½ 
+			 * condition, in which case we found a dup and current has already been incremented.*/
 			if (runner == current) {
 				previous = current;
 		        current = current.next;
@@ -97,7 +102,7 @@ public class Question {
 		System.out.println(head.printForward());
 		LinkedListNode clone = head.clone();
 		deleteDupsB(head);
-		deleteDupsC(clone);
+		deleteDupsNoBuffer(clone);
 		System.out.println(tapB);
 		System.out.println(tapC);
 	}
